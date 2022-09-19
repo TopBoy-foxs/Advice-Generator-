@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Frontend Mentor | Advice generator app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <!-- <style>
+      .attribution {
+        font-size: 28px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style> -->
+  </head>
+  <body>
+    <div class="card">
+      <small>
+        Advice #
+        <span class="advice-number">103</span>
+      </small>
+      <p>
+        "
+        <span class="advice">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
+          sint asperiores cupiditate, quibusdam earum consequuntur incidunt
+          beatae nam quisquam labore?
+        </span>
+        "
+      </p>
+
+      <img
+        src="./images/pattern-divider-desktop.svg"
+        alt=""
+        class="desktop-pattern"
+      />
+      <img
+        src="./images/pattern-divider-mobile.svg"
+        alt=""
+        class="mobile-pattern"
+      />
+
+      <button class="dice-holder" aria-label="Fetch new addvice">
+        <img
+          src="./images/icon-dice.svg"
+          alt="dice"
+          role="button"
+          class="btn"
+        />
+      </button>
+    </div>
+
+    <script>
+      function fetchAdvice() {
+        fetch("https://api.adviceslip.com/advice")
+          .then((response) => response.json())
+          .then(({ slip }) => {
+            //destructuing took place here cause the slip is an object returning another object
+            console.log(slip);
+            const adviceNumber = document.queryselector(".advice-number");
+            const advice = document.querySelector(".advice");
+
+            adviceNumber.textContent = slip.id;
+            advice.textContent = slip.advice;
+          });
+      }
+
+      fetchAdvice();
+
+      const dice = document.querySelector(".dice-holder");
+      dice.addEventListener("click", fetchAdvice);
+    </script>
+  </body>
+</html>
