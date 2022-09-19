@@ -64,24 +64,30 @@
     </div>
 
     <script>
-      function fetchAdvice() {
-        fetch("https://api.adviceslip.com/advice")
-          .then((response) => response.json())
-          .then(({ slip }) => {
-            //destructuing took place here cause the slip is an object returning another object
-            console.log(slip);
-            const adviceNumber = document.queryselector(".advice-number");
-            const advice = document.querySelector(".advice");
+      const adviceId = document.querySelector(".advice-number");
+      const adviceText = document.querySelector(".advice");
+      const dice = document.querySelector(".dice-holder");
 
-            adviceNumber.textContent = slip.id;
-            advice.textContent = slip.advice;
+      function getAdvice() {
+        fetch("https://api.adviceslip.com/advice")
+          .then((response) => {
+            return response.json();
+          })
+          .then((adviceData) => {
+            const adviceNum = adviceData.slip.id;
+            const advice = adviceData.slip.advice;
+
+            adviceId.textContent = adviceNum;
+            adviceText.textContent = advice;
           });
       }
+      dice.addEventListener("click", function () {
+        getAdvice();
+      });
 
-      fetchAdvice();
-
-      const dice = document.querySelector(".dice-holder");
-      dice.addEventListener("click", fetchAdvice);
+      window.onload = () => {
+        getAdvice();
+      };
     </script>
   </body>
 </html>
