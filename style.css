@@ -62,7 +62,8 @@ card > img {
   transition: 150ms;
 }
 .dice-holder:hover {
-  box-shadow: 0px 0px 27px 0px var(--neon-green);
+  box-shadow: 0px 0px 27px 0px var(--neon-green),
+    0px 0px 0px 8px var(--Dark-Grayish-Blue);
 }
 
 .mobile-pattern {
@@ -79,7 +80,8 @@ card > img {
     margin: 0rem; */
   }
   .mobile-pattern {
-    display: block;
+    display: flex;
+    width: 90%;
     margin-inline: auto;
     margin-block: auto;
   }
